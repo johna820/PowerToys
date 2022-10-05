@@ -15,7 +15,7 @@ namespace Microsoft.Plugin.Folder.Sources
         private readonly MatchType _matchType;
         private readonly FileAttributes _attributesToSkip;
 
-        public QueryFileSystemInfo(IDirectoryInfoFactory directoryInfoFactory, MatchType matchType, FileAttributes attributesToSkip)
+        public QueryFileSystemInfo(IDirectoryInfoFactory directoryInfoFactory, MatchType matchType = MatchType.Win32, FileAttributes attributesToSkip = FileAttributes.Hidden)
         {
             _directoryInfoFactory = directoryInfoFactory;
             _matchType = matchType;
