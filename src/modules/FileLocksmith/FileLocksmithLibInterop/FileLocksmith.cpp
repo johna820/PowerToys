@@ -76,6 +76,11 @@ std::vector<ProcessResult> find_processes_recursive(const std::vector<std::wstri
         }
     }
 
+    // Add processes as users of themselves
+    auto processes = nt_ext.processes();
+
+    for (const auto& process : processes)
+    {
         auto path = pid_to_full_path(process.pid);
         auto kernel_name = nt_ext.path_to_kernel_name(path.c_str());
 
