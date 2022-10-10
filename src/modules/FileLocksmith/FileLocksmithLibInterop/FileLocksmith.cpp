@@ -76,9 +76,19 @@ std::vector<ProcessResult> find_processes_recursive(const std::vector<std::wstri
         }
     }
 
+        auto path = pid_to_full_path(process.pid);
+        auto kernel_name = nt_ext.path_to_kernel_name(path.c_str());
+
+        auto found_path = kernel_paths_contain(kernel_name);
+        if (!found_path.empty())
+        {
+            pid_files[process.pid].push_back(std::move(found_path));
+        }
+    }
+
     std::vector<ProcessResult> result;
 
-    for (const auto& process_info : nt_ext.processes())
+    for (const auto& process_info : processes)
     {
         if (auto it = pid_files.find(process_info.pid); it != pid_files.end())
         {
