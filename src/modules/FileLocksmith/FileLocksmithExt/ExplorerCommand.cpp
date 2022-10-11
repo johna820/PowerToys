@@ -225,7 +225,7 @@ ExplorerCommand::~ExplorerCommand()
 inline std::wstring get_module_folderpath(HMODULE mod = nullptr, const bool removeFilename = true)
 {
     wchar_t buffer[MAX_PATH + 1];
-    DWORD actual_length = GetModuleFileNameW(mod, buffer, MAX_PATH);
+    DWORD actual_length = GetModuleFileNameW(mod, buffer, MAX_PATH + 1);
     if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
     {
         const DWORD long_path_length = 0xFFFF; // should be always enough
